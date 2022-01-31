@@ -35,7 +35,7 @@ export const Register = () => {
                 .then(res => res.json())
                 .then(res => {
                     if ("token" in res) {
-                        localStorage.setItem("lu_token", res.token)
+                        localStorage.setItem("tw_token", res.token)
                         navigate('/')
                     }
                 })
@@ -74,10 +74,7 @@ export const Register = () => {
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
-                </fieldset>
+                
                 <fieldset style={{
                     textAlign: "center"
                 }}>

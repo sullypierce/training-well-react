@@ -9,7 +9,7 @@ export const TrainingWell = () => {
     let navigate = useNavigate();
 
     const SignInWrapper = () => {
-        return localStorage.getItem('lu_token') ? <ApplicationViews/> : <Navigate to="/login" replace />;
+        return localStorage.getItem('tw_token') ? <ApplicationViews/> : <Navigate to="/login" replace />;
       };
     
     return <>
