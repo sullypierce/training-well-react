@@ -1,0 +1,28 @@
+import React from "react"
+import { Route, Navigate, Routes, useNavigate } from "react-router-dom"
+import { ApplicationViews } from "./ApplicationViews"
+// import { NavBar } from "./nav/NavBar"
+import { Login } from "./auth/Login"
+import { Register } from "./auth/Register"
+
+export const TrainingWell = () => {
+    let navigate = useNavigate();
+
+    const SignInWrapper = () => {
+        return localStorage.getItem('lu_token') ? <ApplicationViews/> : <Navigate to="/login" replace />;
+      };
+    
+    return <>
+    <Routes>
+        
+        <Route path='*' element={<SignInWrapper/>} />
+                     
+            
+
+        <Route path="/login" element={<Login />}/>
+
+        <Route path="/register" element={<Register />}/>
+            
+    </Routes>
+    </>
+}
