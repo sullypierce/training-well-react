@@ -6,7 +6,8 @@ export const Register = () => {
     const firstName = useRef()
     const lastName = useRef()
     const username = useRef()
-    const bio = useRef()
+    const email = useRef()
+    const coachAccount = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
@@ -18,9 +19,10 @@ export const Register = () => {
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
                 "username": username.current.value,
+                "email" : email.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
-                "bio": bio.current.value,
+                "is_coach": coachAccount.current.value,
                 "password": password.current.value
             }
 
@@ -67,12 +69,23 @@ export const Register = () => {
                     <input ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
                 </fieldset>
                 <fieldset>
+                    <label htmlFor="inputEmail">Email</label>
+                    <input ref={email} type="text" name="Email" className="form-control" placeholder="Email" required />
+                </fieldset>
+                <fieldset>
                     <label htmlFor="inputPassword"> Password </label>
                     <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="coachAccount"> Is this a coaching account? </label>
+                    <select ref={coachAccount} type="password" name="coachAccount" className="form-control"  required >
+                        <option value={true}  > Yes! </option>
+                        <option value={false} > Nope, just want to train myself.</option>
+                    </select>
                 </fieldset>
                 
                 <fieldset style={{
