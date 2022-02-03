@@ -7,4 +7,6 @@
 .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
+    text-align: center;
+    vertical-align: middle;
 }

@@ -1,10 +1,17 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const BenchmarkContext = React.createContext()
 
 export const BenchmarkProvider = (props) => {
     const [ benchmarks, setBenchmarks ] = useState([])
-    const [editBenchmarkId, setEditId] = useState(0)
+    const [editBenchmarkId, setEditBenchmarkId] = useState(0)
+    const navigate = useNavigate()
+
+    const sendToForm = (id) => {
+        setEditBenchmarkId(id)
+        navigate("/benchmarks/form")
+    }
 
     const getBenchmarks = () => {
         return fetch("http://localhost:8000/benchmarks", {
@@ -47,13 +54,13 @@ export const BenchmarkProvider = (props) => {
             body: JSON.stringify(benchmark)
          })
             .then(() => {
-                setEditId(0)
+                setEditBenchmarkId(0)
             })
         }
     
 
     return (
-        <BenchmarkContext.Provider value={{ benchmarks, getBenchmarks, createBenchmark, updateBenchmark, getOneBenchmark, editBenchmarkId, setEditId }} >
+        <BenchmarkContext.Provider value={{ benchmarks, getBenchmarks, createBenchmark, updateBenchmark, getOneBenchmark, editBenchmarkId, sendToForm }} >
             { props.children }
         </BenchmarkContext.Provider>
     )
