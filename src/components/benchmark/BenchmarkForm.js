@@ -125,7 +125,7 @@ export const BenchmarkForm = () => {
             </fieldset>
             
 
-            {editBenchmarkId === 0
+            {editBenchmarkId == 0
                                 ? <button className="btn btn-3"
                                     onClick={submitBenchmark}
                                     >Save New Benchmark</button>

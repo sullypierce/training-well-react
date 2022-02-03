@@ -2,9 +2,9 @@ import React from "react"
 import { Route, Routes} from "react-router-dom"
 import { NavBar } from "./nav/NavBar"
 import { BenchmarkList } from "./benchmark/BenchmarkList"
-import { BenchmarkProvider } from "./benchmark/BenchmarkProvider"
-import { ExerciseProvider } from "./exercise/ExerciseProvider"
 import { BenchmarkForm } from "./benchmark/BenchmarkForm"
+import { ExerciseList } from "./exercise/ExerciseList"
+import { ExerciseForm } from "./exercise/ExerciseForm"
 
 export const ApplicationViews = () => {
     return <>
@@ -21,8 +21,8 @@ export const ApplicationViews = () => {
                     
                         <Route exact path='benchmarks' element={<BenchmarkList/>}/>
                         <Route exact path='benchmarks/form' element={<BenchmarkForm/>} />
-                    
-                    
+                        <Route exact path='exercises' element={<ExerciseList/>}/>
+                        <Route exact path='exercises/form' element={<ExerciseForm/>}/>
                     </Routes>
                 
         </main>
