@@ -4,6 +4,8 @@ import { ApplicationViews } from "./ApplicationViews"
 // import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { BenchmarkProvider } from "./benchmark/BenchmarkProvider"
+import { ExerciseProvider } from "./exercise/ExerciseProvider"
 
 export const TrainingWell = () => {
     let navigate = useNavigate();
@@ -13,6 +15,8 @@ export const TrainingWell = () => {
       };
     
     return <>
+    <BenchmarkProvider>
+    <ExerciseProvider>
     <Routes>
         
         <Route path='*' element={<SignInWrapper/>} />
@@ -24,5 +28,7 @@ export const TrainingWell = () => {
         <Route path="/register" element={<Register />}/>
             
     </Routes>
+    </ExerciseProvider>
+    </BenchmarkProvider>
     </>
 }

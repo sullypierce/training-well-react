@@ -9,7 +9,6 @@ export const BenchmarkList = (props) => {
         getBenchmarks()
     }, [])
 
-    const navigate = useNavigate()
 
     
 

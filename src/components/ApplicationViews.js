@@ -13,8 +13,7 @@ export const ApplicationViews = () => {
             lineHeight: "1.75rem"
         }}>
             <NavBar/>
-            <ExerciseProvider>
-                <BenchmarkProvider>
+            
                     <Routes>
                         <Route path="/welcome" element={<>
                             <h2>Welcome!</h2></>}/>
@@ -25,8 +24,7 @@ export const ApplicationViews = () => {
                     
                     
                     </Routes>
-                </BenchmarkProvider>
-            </ExerciseProvider>
+                
         </main>
     </>
 }

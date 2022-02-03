@@ -9,7 +9,9 @@ export const BenchmarkProvider = (props) => {
     const navigate = useNavigate()
 
     const sendToForm = (id) => {
+        console.log(id)
         setEditBenchmarkId(id)
+        console.log(editBenchmarkId)
         navigate("/benchmarks/form")
     }
 
@@ -45,7 +47,7 @@ export const BenchmarkProvider = (props) => {
     }
 
     const updateBenchmark = (benchmark) => {
-        return fetch(`http://localhost:8000/Benchmarks/${editBenchmarkId}`, {
+        return fetch(`http://localhost:8000/benchmarks/${editBenchmarkId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

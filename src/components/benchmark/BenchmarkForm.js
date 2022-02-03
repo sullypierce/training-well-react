@@ -21,10 +21,7 @@ export const BenchmarkForm = () => {
         date: "1994-08-10"
     })
 
-    /*
-        Get Benchmark types on initialization so that the <select>
-        element presents Benchmark type choices to the user.
-    */
+    
     useEffect(() => {
         getExercises()
         console.log(editBenchmarkId)
