@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { data } from "../datamanager/DataManager"
 
 export const ExerciseContext = React.createContext()
 
@@ -17,55 +18,25 @@ export const ExerciseProvider = (props) => {
     }
     
     const getExercises = () => {
-        return fetch("http://localhost:8000/exercises", {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.get('exercises')
             .then(setExercises)
     }
 
     const getExerciseTypes = () => {
-        return fetch("http://localhost:8000/exercisetypes", {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.get('exercisetypes')
             .then(setExerciseTypes)
     }
 
     const getOneExercise = (id) => {
-        return fetch(`http://localhost:8000/exercises/${id}`, {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.getOne('exercises', id)
     }
 
     const createExercise = (exercise) => {
-        return fetch("http://localhost:8000/exercises", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            },
-            body: JSON.stringify(exercise)
-         })
-            .then(res => res.json())
+        return data.post('exercises', exercise)
     }
 
     const updateExercise = (exercise) => {
-        return fetch(`http://localhost:8000/exercises/${editExerciseId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            },
-            body: JSON.stringify(exercise)
-         })
+        return data.update('exercises', editExerciseId, exercise)
             .then(() => {
                 setEditExerciseId(0)
             })

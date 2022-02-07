@@ -13,6 +13,7 @@ export const ExerciseList = (props) => {
 
     return (
         <article className="games">
+        <h2>Exercises</h2>
         <button className="btn btn-2 btn-sep icon-create"
         onClick={() => sendToExerciseForm(0)}
         >Add New Exercise</button>
