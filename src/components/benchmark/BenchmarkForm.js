@@ -53,7 +53,7 @@ export const BenchmarkForm = () => {
         const benchmark = {...currentBenchmark}
         benchmark.exercise_id = parseInt(currentBenchmark.exercise_id)
 
-        if (editBenchmarkId === 0) {
+        if (editBenchmarkId == 0) {
             
             createBenchmark(benchmark)
             .then(() => navigate("/benchmarks"))

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { data } from "../datamanager/DataManager"
 
 export const BenchmarkContext = React.createContext()
 
@@ -16,45 +17,20 @@ export const BenchmarkProvider = (props) => {
     }
 
     const getBenchmarks = () => {
-        return fetch("http://localhost:8000/benchmarks", {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.get('benchmarks')
             .then(setBenchmarks)
     }
 
     const getOneBenchmark = (id) => {
-        return fetch(`http://localhost:8000/benchmarks/${id}`, {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.getOne('benchmarks', id)
     }
 
     const createBenchmark = (benchmark) => {
-        return fetch("http://localhost:8000/benchmarks", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            },
-            body: JSON.stringify(benchmark)
-         })
-            .then(res => res.json())
+        return data.post('benchmarks', benchmark)
     }
 
     const updateBenchmark = (benchmark) => {
-        return fetch(`http://localhost:8000/benchmarks/${editBenchmarkId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            },
-            body: JSON.stringify(benchmark)
-         })
+        return data.update('benchmarks', editBenchmarkId, benchmark)
             .then(() => {
                 setEditBenchmarkId(0)
             })

@@ -5,7 +5,7 @@ const headers = {
     Authorization: `Token ${localStorage.getItem("tw_token")}`
 }
 
-export const fetch =  {
+export const data =  {
     get: (endpoint) => {
         return fetch(`http://localhost:8000/${endpoint}`, {
             headers:headers
