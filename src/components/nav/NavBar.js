@@ -10,7 +10,7 @@ export const NavBar = () => {
             <h2>TrainingWell</h2>
             </li>
             <li className="navbar__item">
-            <Link className="nav-link" to="/welcome">Welcome</Link>
+            <Link className="nav-link" to="/sessions">Training Sessions</Link>
             </li>
             <li className="navbar__item">
             <Link className="nav-link" to="/exercises">Exercises</Link>

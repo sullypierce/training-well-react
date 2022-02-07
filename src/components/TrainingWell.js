@@ -6,6 +6,7 @@ import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import { BenchmarkProvider } from "./benchmark/BenchmarkProvider"
 import { ExerciseProvider } from "./exercise/ExerciseProvider"
+import { TrainingPlanProvider } from "./trainingplan/TrainingPlanDataProvider"
 
 export const TrainingWell = () => {
     let navigate = useNavigate();
@@ -15,6 +16,7 @@ export const TrainingWell = () => {
       };
     
     return <>
+    <TrainingPlanProvider>
     <BenchmarkProvider>
     <ExerciseProvider>
     <Routes>
@@ -30,5 +32,6 @@ export const TrainingWell = () => {
     </Routes>
     </ExerciseProvider>
     </BenchmarkProvider>
+    </TrainingPlanProvider>
     </>
 }

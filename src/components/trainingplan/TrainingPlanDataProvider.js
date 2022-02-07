@@ -1,84 +1,79 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { data } from "../datamanager/DataManager"
 
-export const ExerciseContext = React.createContext()
+export const TrainingPlanContext = React.createContext()
 
-export const ExerciseProvider = (props) => {
+export const TrainingPlanProvider = (props) => {
     const [ trainingPlan, setTrainingPlan ] = useState([])
     const [sessions, setSessions] = useState([])
     const [ loggedExercises, setLoggedExercises ] = useState([])
     const [editLoggedExerciseId, setEditLoggedExerciseId] = useState(0)
     const navigate = useNavigate()
 
+    
     useEffect(() => {
-        getLoggedExercises()
+        const trainingPlanId = localStorage.getItem('training_plan_id')
+        if (trainingPlanId != 0) {
+            getTrainingPlan(trainingPlanId)
+        }
+    }, [])
+    
+    useEffect(() => {
+            getSessions(localStorage.getItem('training_plan_id'))
     }, [trainingPlan])
 
-    const sendToExerciseForm = (id) => {
+    // const sendToExerciseForm = (id) => {
         
-        setEditExerciseId(id)
-        navigate("/exercises/form")
-    }
+    //     setEditExerciseId(id)
+    //     navigate("/exercises/form")
+    // }
     
     const getLoggedExercises = () => {
-        return fetch("http://localhost:8000/loggedexercises", {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.get('loggedexercises')
             .then(setLoggedExercises)
     }
-
-    const getTrainingPlan = () => {
-        return fetch("http://localhost:8000/trainingplans", {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
-            .then(setTrainingPlan)
-    }
-
+    
     const getOneLoggedExercise = (id) => {
-        return fetch(`http://localhost:8000/loggedexercises/${id}`, {
-            headers:{
-                "Authorization": `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.getOne('loggedexercises', id)
     }
 
     const createLoggedExercise = (exercise) => {
-        return fetch("http://localhost:8000/loggedexercises", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            },
-            body: JSON.stringify(exercise)
-         })
-            .then(res => res.json())
+        return data.post('loggedexercise', exercise)
     }
 
     const updateLoggedExercise = (exercise) => {
-        return fetch(`http://localhost:8000/loggedexercises/${editExerciseId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            },
-            body: JSON.stringify(exercise)
-         })
+        return data.update('loggedexercise', editLoggedExerciseId, exercise)
             .then(() => {
-                setEditExerciseId(0)
+                setEditLoggedExerciseId(0)
             })
         }
+
+    const getTrainingPlan = () => {
+        return data.get('trainingplans')
+            .then(setTrainingPlan)
+    }
+
+    //custom fetch that only gets the sessions for a users training plan
+    const getSessions = (trainingPlanId) => {
+        return fetch(`http://localhost:8000/sessions?training_plan_id=${trainingPlanId}`, {
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("tw_token")}`
+            }
+        })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data)
+                setSessions(data)
+            })
+    }
+    
     
 
     return (
-        <ExerciseContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateExercise, getOneExercise, editExerciseId, setEditExerciseId, getExerciseTypes, exerciseTypes, sendToExerciseForm }} >
+        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions }} >
             { props.children }
-        </ExerciseContext.Provider>
+        </TrainingPlanContext.Provider>
     )
 }

@@ -5,6 +5,7 @@ import { BenchmarkList } from "./benchmark/BenchmarkList"
 import { BenchmarkForm } from "./benchmark/BenchmarkForm"
 import { ExerciseList } from "./exercise/ExerciseList"
 import { ExerciseForm } from "./exercise/ExerciseForm"
+import { SessionList } from "./sessions/SessionList"
 
 export const ApplicationViews = () => {
     return <>
@@ -21,8 +22,11 @@ export const ApplicationViews = () => {
                     
                         <Route exact path='benchmarks' element={<BenchmarkList/>}/>
                         <Route exact path='benchmarks/form' element={<BenchmarkForm/>} />
+
                         <Route exact path='exercises' element={<ExerciseList/>}/>
                         <Route exact path='exercises/form' element={<ExerciseForm/>}/>
+                        
+                        <Route exact path='sessions' element={<SessionList/>}/>
                     </Routes>
                 
         </main>
