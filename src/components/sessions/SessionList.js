@@ -1,9 +1,15 @@
 import React, { useContext, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 
 export const SessionList = (props) => {
-    const { sessions, setSessions }  = useContext(TrainingPlanContext)
+    const { sessions, setSessions, setSingleViewSession }  = useContext(TrainingPlanContext)
+    const navigate = useNavigate()
     
+    const sendToSessionExerciseList = (session) => {
+        setSingleViewSession(session)
+        navigate('/session/details')
+    } 
 
     return (
         <article className="sessions">
@@ -20,6 +26,9 @@ export const SessionList = (props) => {
                         {/* <button className="btn btn-3"
                                     onClick={() => {sendToSessionForm(session.id)}}
                                     >Edit</button> */}
+                        <button className="btn btn-3"
+                            onClick={() => {sendToSessionExerciseList(session)}}
+                        >Details</button>
                     </section>
                 })
             }

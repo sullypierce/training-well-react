@@ -7,6 +7,12 @@ export const TrainingPlanContext = React.createContext()
 export const TrainingPlanProvider = (props) => {
     const [ trainingPlan, setTrainingPlan ] = useState([])
     const [sessions, setSessions] = useState([])
+
+    //holds a single session when you go to a detail view
+    const [singleViewSession, setSingleViewSession] = useState({})
+    //holds the exercises for a single session when you go to a detail view
+    const [singleSessionExercises, setSingleSessionExercises] = useState([])
+
     const [ loggedExercises, setLoggedExercises ] = useState([])
     const [editLoggedExerciseId, setEditLoggedExerciseId] = useState(0)
     const navigate = useNavigate()
@@ -19,6 +25,10 @@ export const TrainingPlanProvider = (props) => {
     useEffect(() => {
             getSessions()
     }, [trainingPlan])
+
+    useEffect(() => {
+        getExercisesBySession(singleViewSession.id)
+    }, [singleViewSession])
 
     // const sendToExerciseForm = (id) => {
         
@@ -51,25 +61,22 @@ export const TrainingPlanProvider = (props) => {
             .then(setTrainingPlan)
     }
 
-    //custom fetch that only gets the sessions for a users training plan
     const getSessions = () => {
-        return fetch(`http://localhost:8000/sessions`, {
-            headers:{
-                "Content-Type": "application/json",
-                Authorization: `Token ${localStorage.getItem("tw_token")}`
-            }
-        })
-            .then(response => response.json())
+        return data.get('sessions')
             .then((data) => {
-                console.log(data)
                 setSessions(data)
             })
+    }
+
+    const getExercisesBySession = (id) => {
+        return data.get(`loggedexercises?session_id=${id}`)
+            .then(setSingleSessionExercises)
     }
     
     
 
     return (
-        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions }} >
+        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises }} >
             { props.children }
         </TrainingPlanContext.Provider>
     )
