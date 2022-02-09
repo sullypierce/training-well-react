@@ -13,14 +13,11 @@ export const TrainingPlanProvider = (props) => {
 
     
     useEffect(() => {
-        const trainingPlanId = localStorage.getItem('training_plan_id')
-        if (trainingPlanId != 0) {
-            getTrainingPlan(trainingPlanId)
-        }
+        getTrainingPlan()
     }, [])
     
     useEffect(() => {
-            getSessions(localStorage.getItem('training_plan_id'))
+            getSessions()
     }, [trainingPlan])
 
     // const sendToExerciseForm = (id) => {
@@ -55,8 +52,8 @@ export const TrainingPlanProvider = (props) => {
     }
 
     //custom fetch that only gets the sessions for a users training plan
-    const getSessions = (trainingPlanId) => {
-        return fetch(`http://localhost:8000/sessions?training_plan_id=${trainingPlanId}`, {
+    const getSessions = () => {
+        return fetch(`http://localhost:8000/sessions`, {
             headers:{
                 "Content-Type": "application/json",
                 Authorization: `Token ${localStorage.getItem("tw_token")}`
