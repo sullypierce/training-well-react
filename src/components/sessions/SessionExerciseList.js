@@ -17,7 +17,7 @@ export const SessionExerciseList = (props) => {
                 singleSessionExercises.map(singleSessionExercise => {
                     return <section key={`singleSessionExercise--${singleSessionExercise.id}`} className="singleSessionExercise">
 
-                        <div className="singleSessionExercise__date">Date: {singleSessionExercise.name}</div>
+                        <div className="singleSessionExercise__date">Exercise: {singleSessionExercise.exercise.name}</div>
                         <div className="singleSessionExercise__notes">notes: {singleSessionExercise.notes}</div>
                         <div className="singleSessionExercise__notes">sets: {singleSessionExercise.sets}</div>
                         <div className="singleSessionExercise__notes">reps: {singleSessionExercise.reps}</div>
