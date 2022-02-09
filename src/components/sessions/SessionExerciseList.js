@@ -13,9 +13,13 @@ export const SessionExerciseList = (props) => {
     useEffect(() => {
         const exerciseArray = singleSessionExercises
         setThisSessionExercises(exerciseArray)
+        setSessionTimeCompleted(singleViewSession.time_completed)
     }, [singleSessionExercises])
 
     const changeState = (event) => {
+        if (event.target.name == 'session_time') {
+            setSessionTimeCompleted(event.target.value)
+        } else {
         const exercisesCopy = [...thisSessionExercises]
         const elementName = event.target.name.split('_')[0]
         const exerciseId = event.target.name.split('_')[1]
@@ -26,7 +30,7 @@ export const SessionExerciseList = (props) => {
             }
         })
         setThisSessionExercises(newState)
-    }
+    }}
 
     return (
         <article className="sessions">
@@ -34,8 +38,14 @@ export const SessionExerciseList = (props) => {
         <button className="btn btn-2 btn-sep icon-create"
         //onClick={() => sendToExerciseForm(0)}
         >Log Session</button>
-            <h3>{singleViewSession.assigned_date}</h3>
+        <div className="session">
+        <h3>{singleViewSession.assigned_date}</h3>
             <h3>{singleViewSession.notes}</h3>
+            <label htmlFor={`session_time`}>Time Completed:</label>
+            <input name="session_time" type={'time'} onChange={changeState} value={sessionTimeCompleted}/>
+        </div>
+            
+            
             {
                 singleSessionExercises.map(singleSessionExercise => {
                     return <section key={`singleSessionExercise--${singleSessionExercise.id}`} className="singleSessionExercise">
