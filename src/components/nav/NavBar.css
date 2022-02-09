@@ -4,6 +4,7 @@
     justify-content: left;
     align-items: center;
     background-color: green;
+    border-radius: 5px;
 }
 
 .navbar__item {
@@ -16,6 +17,17 @@
     border-color: black;
     margin: 3px;
     border-radius: 4px;
-    background-color: antiquewhite;
+    background-color: whitesmoke;
     text-emphasis-color: black;
+}
+
+
+
+a:visited {
+    color: black
+}
+a:link {
+}
+a:hover {
+    color: gold
 }

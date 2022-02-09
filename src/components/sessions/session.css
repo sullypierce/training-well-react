@@ -1,0 +1,16 @@
+
+.session {
+    border-color: black;
+    border-radius: 4px;
+    border: solid 2px;
+    margin: 5px;
+}
+
+.complete {
+    background-color: lightgreen;
+}
+
+.tbd {
+    background-color: red;
+}
+

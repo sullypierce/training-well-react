@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react"
+import './session.css'
 import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 
@@ -19,7 +20,7 @@ export const SessionList = (props) => {
         >Schedule New Session</button>
             {
                 sessions.map(session => {
-                    return <section key={`session--${session.id}`} className="session">
+                    return <section key={`session--${session.id}`} className={session.time_completed != null ? 'session complete': 'session tbd'}>
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
