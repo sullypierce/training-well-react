@@ -1,3 +1,9 @@
+
+.logo {
+    height: 75px;
+    width: 75px;
+}
+
 .navbar {
     display: flex;
     flex-wrap: nowrap;
@@ -5,6 +11,7 @@
     align-items: center;
     background-color: green;
     border-radius: 5px;
+    padding-left: 10px;
 }
 
 .navbar__item {
@@ -19,7 +26,7 @@
     border-radius: 4px;
     background-color: burlywood;
     text-emphasis-color: black;
-    
+    max-height: 30px;
 }
 
 
