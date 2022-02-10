@@ -30,8 +30,8 @@ export const SessionExerciseList = (props) => {
                 } else {
                     exercise[elementName] = event.target.value
                 }
-                return exercise
             }
+            return exercise
         })
         setThisSessionExercises(newState)
     }}
