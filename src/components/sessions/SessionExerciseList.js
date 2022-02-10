@@ -41,6 +41,8 @@ export const SessionExerciseList = (props) => {
     }}
 
     const numArray = [1,2,3,4,5,6,7,8,9,10]
+    const qualityWords = ['Terrible', 'Bad', 'Average', 'Good', 'Great']
+    const qualityNumbers = [1,2,3,4,5]
 
     return (
         <article className="sessions">
@@ -52,7 +54,7 @@ export const SessionExerciseList = (props) => {
         <h3>{singleViewSession.assigned_date}</h3>
             <h3>{singleViewSession.notes}</h3>
             <label htmlFor={`session__time_completed`}>Time Completed:</label>
-            <input name="session__time_completed" type={'time'} onChange={changeState} value={sessionCompleted.time_completed}/>
+            <input name="session__time_completed" type={'time'} onChange={changeState} value={sessionCompleted.time_completed != null ? sessionCompleted.time_completed : '00:00'}/>
             <label htmlFor={`session__sleep_hours`}>Hours of Sleep last Night:</label>
             <select name="session__sleep_hours"  onChange={changeState} value={sessionCompleted.sleep_hours}>
                 {
@@ -65,6 +67,13 @@ export const SessionExerciseList = (props) => {
                 {
                     
                     numArray.map(num => <option key={num}>{num}</option>)
+                }
+            </select>
+            <label htmlFor={`session__quality`}>Workout Quality:</label>
+            <select name="session__quality"  onChange={changeState} value={sessionCompleted.quality}>
+                {
+                    
+                    qualityNumbers.map(num => <option key={num} value={num}>{qualityWords[num-1]}</option>)
                 }
             </select>
         </div>
