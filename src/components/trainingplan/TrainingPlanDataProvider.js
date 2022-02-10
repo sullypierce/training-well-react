@@ -20,11 +20,9 @@ export const TrainingPlanProvider = (props) => {
     
     useEffect(() => {
         getTrainingPlan()
+        getSessions()
     }, [])
     
-    useEffect(() => {
-            getSessions()
-    }, [trainingPlan])
 
     useEffect(() => {
         getExercisesBySession(singleViewSession.id)

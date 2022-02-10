@@ -14,7 +14,7 @@ export const SessionList = (props) => {
 
     return (
         <article className="sessions">
-        <h2>Sessions</h2>
+        <h2 className='titlecard'>Sessions</h2>
         <button className="btn btn-2 btn-sep icon-create"
         //onClick={() => sendToExerciseForm(0)}
         >Schedule New Session</button>

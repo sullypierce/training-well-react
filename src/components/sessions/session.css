@@ -4,13 +4,19 @@
     border-radius: 4px;
     border: solid 2px;
     margin: 5px;
+    width: 25%;
 }
 
 .complete {
     background-color: lightgreen;
+    opacity: 50%;
 }
 
 .tbd {
     background-color: red;
+    opacity: 50%;
 }
 
+.titlecard {
+    color: green
+}
