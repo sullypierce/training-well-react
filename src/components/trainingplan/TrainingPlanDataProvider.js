@@ -24,10 +24,6 @@ export const TrainingPlanProvider = (props) => {
     }, [])
     
 
-    useEffect(() => {
-        getExercisesBySession(singleViewSession.id)
-    }, [singleViewSession])
-
     // const sendToExerciseForm = (id) => {
         
     //     setEditExerciseId(id)
@@ -74,7 +70,7 @@ export const TrainingPlanProvider = (props) => {
     
 
     return (
-        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises, getSessions }} >
+        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises, getSessions, getExercisesBySession }} >
             { props.children }
         </TrainingPlanContext.Provider>
     )

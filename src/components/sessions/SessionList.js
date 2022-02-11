@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 
 export const SessionList = (props) => {
-    const { sessions, setSessions, setSingleViewSession }  = useContext(TrainingPlanContext)
+    const { sessions, setSessions, setSingleViewSession, getExercisesBySession }  = useContext(TrainingPlanContext)
     const navigate = useNavigate()
     
     const sendToSessionExerciseList = (session) => {
         setSingleViewSession(session)
+        getExercisesBySession(session.id)
+        .then(() => {
         navigate('/session/details')
+        })
     } 
 
     return (
