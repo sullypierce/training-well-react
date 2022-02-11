@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from "react"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
+import { data } from "../datamanager/DataManager"
+import { useNavigate } from "react-router-dom"
 
 export const SessionExerciseList = (props) => {
-    const { singleViewSession, singleSessionExercises }  = useContext(TrainingPlanContext)
+    const { singleViewSession, singleSessionExercises, getSessions }  = useContext(TrainingPlanContext)
     
     //hold the time completed if entered 
     const [sessionCompleted, setSessionCompleted] = useState({...singleViewSession});
 
     //hold the exercises so they can be edited if the user chooses to log this session
     const [thisSessionExercises, setThisSessionExercises] = useState([]);
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const exerciseArray = singleSessionExercises
@@ -40,6 +44,27 @@ export const SessionExerciseList = (props) => {
         setThisSessionExercises(newState)
     }}
 
+    const logSession = () => {
+        
+        const editedSession = {...sessionCompleted}
+        editedSession.sleep_hours = parseInt(sessionCompleted.sleep_hours)
+        editedSession.energy_level = parseInt(sessionCompleted.energy_level)
+        editedSession.quality = parseInt(sessionCompleted.quality)
+        //create a fetch request for each exercise to update and add them to an array
+        const promises = thisSessionExercises.map((exercise) => {
+            return data.update('loggedexercises', exercise.id, exercise)
+        })
+        //add a request to update the session
+        promises.push(data.update('sessions', editedSession.id, editedSession))
+        Promise.all(promises)
+        .then(()=> {
+            getSessions()
+            .then(()=> {
+                navigate('/sessions')
+            })
+        })
+    }
+
     const numArray = [1,2,3,4,5,6,7,8,9,10]
     const qualityWords = ['Terrible', 'Bad', 'Average', 'Good', 'Great']
     const qualityNumbers = [1,2,3,4,5]
@@ -48,7 +73,7 @@ export const SessionExerciseList = (props) => {
         <article className="sessions">
         <h2>Sessions</h2>
         <button className="btn btn-2 btn-sep icon-create"
-        //onClick={() => sendToExerciseForm(0)}
+        onClick={logSession}
         >Log Session</button>
         <div className="session">
         <h3>{singleViewSession.assigned_date}</h3>
@@ -90,10 +115,10 @@ export const SessionExerciseList = (props) => {
                         <div className="singleSessionExercise__reps">reps: {singleSessionExercise.reps}</div>
                         <div className="singleSessionExercise__weight">weight: {singleSessionExercise.weight_used}</div>
                         <label htmlFor={`completed__${singleSessionExercise.id}`}>Completed</label>
-                        <input name={`completed__${singleSessionExercise.id}`} type='checkbox' value={singleSessionExercise.completed} onChange={changeState}/>
+                        <input name={`completed__${singleSessionExercise.id}`} type='checkbox' checked={singleSessionExercise.completed} onChange={changeState}/>
 
                         {/* <button className="btn btn-3"
-                                    onClick={() => {sendTosingleSessionExerciseForm(singleSessionExercise.id)}}
+                                    onClick={logSession}
                                     >Edit</button> */}
                     </section>
                 })

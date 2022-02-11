@@ -74,7 +74,7 @@ export const TrainingPlanProvider = (props) => {
     
 
     return (
-        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises }} >
+        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises, getSessions }} >
             { props.children }
         </TrainingPlanContext.Provider>
     )
