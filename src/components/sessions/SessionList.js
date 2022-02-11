@@ -15,12 +15,12 @@ export const SessionList = (props) => {
     return (
         <article className="sessions">
         <h2 className='titlecard'>Sessions</h2>
-        <button className="btn btn-2 btn-sep icon-create"
+        <button className="btn btn-2 btn-sep icon-create button"
         //onClick={() => sendToExerciseForm(0)}
         >Schedule New Session</button>
             {
                 sessions.map(session => {
-                    return <section key={`session--${session.id}`} className={session.time_completed != null ? 'session complete': 'session tbd'}>
+                    return <section key={`session--${session.id}`} className={session.time_completed != null ? 'card session complete': 'card session tbd'}>
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
