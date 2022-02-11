@@ -7,6 +7,7 @@ import { ExerciseList } from "./exercise/ExerciseList"
 import { ExerciseForm } from "./exercise/ExerciseForm"
 import { SessionList } from "./sessions/SessionList"
 import { SessionExerciseList } from "./sessions/SessionExerciseList"
+import { SessionForm } from "./sessions/SessionForm"
 
 export const ApplicationViews = () => {
     return <>
@@ -29,6 +30,7 @@ export const ApplicationViews = () => {
                         
                         <Route exact path='sessions' element={<SessionList/>}/>
                         <Route exact path='session/details' element={<SessionExerciseList />}/>
+                        <Route exact path='sessions/new' element={<SessionForm/>}/>
                     </Routes>
                 
         </main>

@@ -15,11 +15,15 @@ export const SessionList = (props) => {
         })
     } 
 
+    const sendToSessionForm = () => {
+        navigate("/sessions/new")
+    }
+
     return (
         <article className="sessions">
         <h2 className='titlecard'>Sessions</h2>
         <button className="btn btn-2 btn-sep icon-create button"
-        //onClick={() => sendToExerciseForm(0)}
+        onClick={sendToSessionForm}
         >Schedule New Session</button>
             {
                 sessions.map(session => {
