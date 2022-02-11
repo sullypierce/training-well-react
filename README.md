@@ -1,3 +1,5 @@
+TrainingWell is a solo app currently in development that helps users plan and track workouts, as well as visualize their data and physical improvement.  It has a Django backend that can be found at https://github.com/sullypierce/training-well-api.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
