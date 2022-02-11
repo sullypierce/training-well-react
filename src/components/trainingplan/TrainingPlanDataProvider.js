@@ -55,6 +55,11 @@ export const TrainingPlanProvider = (props) => {
             .then(setTrainingPlan)
     }
 
+    const createSession = (session) => {
+        return data.post('sessions', session)
+        
+    }
+
     const getSessions = () => {
         return data.get('sessions')
             .then((data) => {
@@ -70,7 +75,7 @@ export const TrainingPlanProvider = (props) => {
     
 
     return (
-        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises, getSessions, getExercisesBySession }} >
+        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises, getSessions, createSession, getExercisesBySession }} >
             { props.children }
         </TrainingPlanContext.Provider>
     )

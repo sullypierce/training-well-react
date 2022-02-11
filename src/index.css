@@ -20,10 +20,9 @@ code {
 .card {
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  border: solid 2px;
+  border-top: solid 2px;
   margin: 5px;
-  width: 50%;
+
 }
 
 .card_element {

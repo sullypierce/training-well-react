@@ -14,12 +14,12 @@ export const BenchmarkList = (props) => {
 
     return (
         <article className="games">
-        <button className="btn btn-2 btn-sep icon-create"
+        <button className="btn btn-2 btn-sep icon-create button"
         onClick={() => sendToForm("0")}
         >Set New Benchmark</button>
             {
                 benchmarks.map(benchmark => {
-                    return <section key={`benchmark--${benchmark.id}`} className="benchmark">
+                    return <section key={`benchmark--${benchmark.id}`} className="benchmark card">
 
                         <div className="benchmark__exercisename">Exercise: {benchmark.exercise.name}</div>
                         <div className="benchmark__reps">Reps: {benchmark.reps}</div>

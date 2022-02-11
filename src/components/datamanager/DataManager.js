@@ -29,6 +29,7 @@ export const data =  {
             },
             body: JSON.stringify(object)
          })
+         .then(response => response.json())
     },
 
     update: (endpoint, id, object) => {
