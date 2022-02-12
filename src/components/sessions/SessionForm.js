@@ -9,10 +9,6 @@ export const SessionForm = () => {
     const navigate = useNavigate()
     const { createSession, getOneSession, editSessionId, updateSession, SessionTypes, getSessionTypes } = useContext(TrainingPlanContext)
     const {exercises, getExercises} = useContext(ExerciseContext)
-    const [newSession, setNewSession] = useState({
-        notes: '',
-        assigned_date: '0000-00-00'
-    })
     const [showForm, setShowForm] = useState(true)
     const [sessionExercises, setSessionExercises]= useState([])
     const [newExercise, setNewExercise] = useState({
@@ -26,10 +22,9 @@ export const SessionForm = () => {
         provide some default values.
     */
     const [currentSession, setCurrentSession] = useState({
-        Session_type_id: "1",
-        description: "",
-        url: "",
-        name: ""
+        
+        notes: "",
+        assigned_date: ""
     })
 
     
@@ -40,9 +35,9 @@ export const SessionForm = () => {
 
 
     const changeSessionState = (event) => {
-        const newSessionState = { ...currentSession }
-        newSessionState[`${event.target.name}`] = event.target.value
-        setNewSession(newSessionState)
+        const currentSessionState = { ...currentSession }
+        currentSessionState[`${event.target.name}`] = event.target.value
+        setCurrentSession(currentSessionState)
     }
 
     const changeExerciseState = (event) => {
@@ -52,16 +47,16 @@ export const SessionForm = () => {
     const submitSession = evt => {
         // Prevent form from being submitted
         evt.preventDefault()
-        const session = {...newSession}
+        const session = {...currentSession}
         session.time_completed='00:00'
         session.sleep_hours = 0
         session.energy_level = 0
         session.quality = 0
-        // createSession(session)
-        // .then((session) => {
-            setNewSession(session)
+        createSession(session)
+        .then((session) => {
+            setCurrentSession(session)
             setShowForm(false)
-        // })
+        })
         
     }
 
@@ -74,16 +69,16 @@ export const SessionForm = () => {
                 <div className="form-group">
                     <label htmlFor="notes">notes: </label>
                     <input type="text" name="notes" required autoFocus className="form-control"
-                        value={newSession.notes}
+                        value={currentSession.notes}
                         onChange={changeSessionState}
                     />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="assigned_date">_assigned: </label>
+                    <label htmlFor="assigned_date">Schedule Date: </label>
                     <input type="date" name="assigned_date" required autoFocus className="form-control"
-                        value={newSession.date_assigned}
+                        value={currentSession.date_assigned}
                         onChange={changeSessionState}
                     />
                 </div>
@@ -95,7 +90,10 @@ export const SessionForm = () => {
         </form> : <h3>Session</h3>}
 
         {/* form for adding an exercise to the session */}
-        {!showForm ? <form className='loggedExerciseForm'>
+        {!showForm ? 
+        <>
+        <h3>Now Add Exercises</h3>
+        <form className='loggedExerciseForm'>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="exercise_id">Exercise: </label>
@@ -117,7 +115,7 @@ export const SessionForm = () => {
                     />
                 </div>
             </fieldset>
-        </form> : <></> }
+        </form></> : <></> }
 
         {/* //show the exercises that have been added to the session so far */}
         {sessionExercises.map(exercise => {

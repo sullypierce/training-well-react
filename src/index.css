@@ -21,6 +21,7 @@ code {
   display: flex;
   flex-direction: column;
   border-top: solid 2px;
+  border-color: darkgreen;
   margin: 5px;
 
 }
