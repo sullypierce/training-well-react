@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 
 export const SessionList = (props) => {
-    const { sessions, setSessions, setSingleViewSession, getExercisesBySession, setEditSession }  = useContext(TrainingPlanContext)
+    const { sessions, setSessions, setSingleViewSession, getExercisesBySession, setEditSession, setSingleSessionExercises }  = useContext(TrainingPlanContext)
     const navigate = useNavigate()
     
     const sendToSessionExerciseList = (session) => {
@@ -18,7 +18,15 @@ export const SessionList = (props) => {
 
     const sendToSessionForm = (session) => {
         setEditSession(session)
-        navigate("/sessions/form")
+        if(session.id) {
+            getExercisesBySession(session.id)
+            .then(() => {
+                navigate('/sessions/form')
+                })
+        } else {
+            setSingleSessionExercises([])
+            navigate("/sessions/form")
+        }
     }
 
     return (
