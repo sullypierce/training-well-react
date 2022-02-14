@@ -58,16 +58,22 @@ export const SessionForm = () => {
         // Prevent form from being submitted
         evt.preventDefault()
         const session = {...currentSession}
-        session.time_completed=null
-        session.sleep_hours = 0
-        session.energy_level = 0
-        session.quality = 0
-        createSession(session)
-        .then((session) => {
-            setCurrentSession(session)
-            setShowSessionForm(false)
-            setShowExerciseForm(true)
-        })
+        if (currentSession.id) {
+            updateSession(session)
+            .then(() => setShowSessionForm(false))
+        } else {
+
+            session.time_completed=null
+            session.sleep_hours = 0
+            session.energy_level = 0
+            session.quality = 0
+            createSession(session)
+            .then((session) => {
+                setCurrentSession(session)
+                setShowSessionForm(false)
+                setShowExerciseForm(true)
+            })
+        }
         
     }
 
@@ -129,9 +135,9 @@ export const SessionForm = () => {
         <><h3>Session</h3>
         <div className="session__date">Date: {currentSession.assigned_date}</div>
                         <div className="session__notes">notes: {currentSession.notes}</div>
-                        {/* <button className="btn btn-3"
-                                    onClick={() => {sendToSessionForm(session.id)}}
-                                    >Edit</button> */}</>}
+                        <button className="btn btn-3"
+                                    onClick={() => {setShowSessionForm(true)}}
+                                    >Edit</button></>}
 
         {/* form for adding an exercise to the session, only show after saving a new session or if editing a session */}
         {showExerciseForm ? 
