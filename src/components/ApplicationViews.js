@@ -30,7 +30,7 @@ export const ApplicationViews = () => {
                         
                         <Route exact path='sessions' element={<SessionList/>}/>
                         <Route exact path='session/details' element={<SessionExerciseList />}/>
-                        <Route exact path='sessions/new' element={<SessionForm/>}/>
+                        <Route exact path='sessions/form' element={<SessionForm/>}/>
                     </Routes>
                 
         </main>

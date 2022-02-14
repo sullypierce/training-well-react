@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 
 export const SessionList = (props) => {
-    const { sessions, setSessions, setSingleViewSession, getExercisesBySession }  = useContext(TrainingPlanContext)
+    const { sessions, setSessions, setSingleViewSession, getExercisesBySession, setEditSession }  = useContext(TrainingPlanContext)
     const navigate = useNavigate()
     
     const sendToSessionExerciseList = (session) => {
@@ -15,15 +15,17 @@ export const SessionList = (props) => {
         })
     } 
 
-    const sendToSessionForm = () => {
-        navigate("/sessions/new")
+
+    const sendToSessionForm = (session) => {
+        setEditSession(session)
+        navigate("/sessions/form")
     }
 
     return (
         <article className="sessions">
         <h2 className='titlecard'>Sessions</h2>
         <button className="btn btn-2 btn-sep icon-create button"
-        onClick={sendToSessionForm}
+        onClick={() => sendToSessionForm({})}
         >Schedule New Session</button>
             {
                 sessions.map(session => {
@@ -31,9 +33,9 @@ export const SessionList = (props) => {
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
-                        {/* <button className="btn btn-3"
-                                    onClick={() => {sendToSessionForm(session.id)}}
-                                    >Edit</button> */}
+                        <button className="btn btn-3"
+                                    onClick={() => {sendToSessionForm(session)}}
+                                    >Edit</button>
                         <button className="btn btn-3"
                             onClick={() => {sendToSessionExerciseList(session)}}
                         >Details</button>

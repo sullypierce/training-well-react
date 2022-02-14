@@ -7,7 +7,7 @@ import { ExerciseContext } from "../exercise/ExerciseProvider"
 
 export const SessionForm = () => {
     const navigate = useNavigate()
-    const { createSession, getOneSession, editSessionId, updateSession, SessionTypes, getSessionTypes } = useContext(TrainingPlanContext)
+    const { createSession, getOneSession, editSessionId, updateSession, SessionTypes, getSessionTypes, editSession } = useContext(TrainingPlanContext)
     const {exercises, getExercises} = useContext(ExerciseContext)
     const [showForm, setShowForm] = useState(true)
     const [sessionExercises, setSessionExercises]= useState([])
@@ -21,11 +21,11 @@ export const SessionForm = () => {
         the properties of this state variable, you need to
         provide some default values.
     */
-    const [currentSession, setCurrentSession] = useState({
+    const [currentSession, setCurrentSession] = useState(editSession == {} ? {
         
         notes: "",
         assigned_date: ""
-    })
+    } : editSession)
 
     
     useEffect(() => {
@@ -78,7 +78,7 @@ export const SessionForm = () => {
                 <div className="form-group">
                     <label htmlFor="assigned_date">Schedule Date: </label>
                     <input type="date" name="assigned_date" required autoFocus className="form-control"
-                        value={currentSession.date_assigned}
+                        value={currentSession.assigned_date}
                         onChange={changeSessionState}
                     />
                 </div>
@@ -87,7 +87,13 @@ export const SessionForm = () => {
              <button className="btn btn-3"
                     onClick={submitSession}
             >Save</button>
-        </form> : <h3>Session</h3>}
+        </form> : 
+        <><h3>Session</h3>
+        <div className="session__date">Date: {currentSession.assigned_date}</div>
+                        <div className="session__notes">notes: {currentSession.notes}</div>
+                        {/* <button className="btn btn-3"
+                                    onClick={() => {sendToSessionForm(session.id)}}
+                                    >Edit</button> */}</>}
 
         {/* form for adding an exercise to the session */}
         {!showForm ? 

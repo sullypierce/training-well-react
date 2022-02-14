@@ -7,6 +7,7 @@ export const TrainingPlanContext = React.createContext()
 export const TrainingPlanProvider = (props) => {
     const [ trainingPlan, setTrainingPlan ] = useState([])
     const [sessions, setSessions] = useState([])
+    const [editSession, setEditSession] = useState({})
 
     //holds a single session when you go to a detail view
     const [singleViewSession, setSingleViewSession] = useState({})
@@ -75,7 +76,8 @@ export const TrainingPlanProvider = (props) => {
     
 
     return (
-        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, singleViewSession, setSingleViewSession, singleSessionExercises, getSessions, createSession, getExercisesBySession }} >
+        <TrainingPlanContext.Provider value={{ loggedExercises, getLoggedExercises, createLoggedExercise, updateLoggedExercise, sessions, setSessions, 
+        singleViewSession, setSingleViewSession, singleSessionExercises, getSessions, createSession, getExercisesBySession, editSession, setEditSession }} >
             { props.children }
         </TrainingPlanContext.Provider>
     )
