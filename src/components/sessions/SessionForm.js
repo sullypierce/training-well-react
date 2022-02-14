@@ -84,6 +84,22 @@ export const SessionForm = () => {
         exercise.sets = parseInt(exercise.sets)
         if (newExercise.id) {
             data.update('loggedexercises', exercise.id, exercise)
+            .then(() => {
+                const newExerciseArray = sessionExercises.map((ex) => {
+                    if (ex.id != newExercise.id) {
+                        return ex
+                    }
+                })
+                newExerciseArray.push(exercise)
+                setSessionExercises(newExerciseArray)
+                setNewExercise({
+                    notes: '',
+                    exercise_id: 1,
+                    reps: 0,
+                    sets: 0
+                })
+                setShowExerciseForm(false)
+            })
         }else {
 
             exercise.session_id = currentSession.id
@@ -190,6 +206,7 @@ export const SessionForm = () => {
 
         {/* //show the exercises that have been added to the session so far */}
         {sessionExercises.map(exercise => {
+            if (exercise != undefined) {
             return <div className="card" key={`exercise_${exercise.id}`}>
                 <div className='card_item' >{exercise.exercise.name}</div>
                 <div className='card_item' >{exercise.notes}</div>
@@ -202,6 +219,7 @@ export const SessionForm = () => {
                         }}
                 >Edit</button>
             </div>
+            }
         })}
         </>
 }
