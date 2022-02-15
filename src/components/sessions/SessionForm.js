@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useNavigate } from 'react-router-dom'
 import { ExerciseContext } from "../exercise/ExerciseProvider"
 import { data } from "../datamanager/DataManager"
@@ -13,6 +14,7 @@ export const SessionForm = () => {
     const [showSessionForm, setShowSessionForm] = useState(true)
     const [showExerciseForm, setShowExerciseForm] = useState(false)
     const [sessionExercises, setSessionExercises]= useState([])
+    const [draggingExercise, setDraggingExercise] = useState({})
     const [newExercise, setNewExercise] = useState({
         notes: '',
         exercise_id: 1,
@@ -41,6 +43,26 @@ export const SessionForm = () => {
         
     }, [])
 
+    const grid = 8;
+
+    const getItemStyle = (isDragging, draggableStyle) => ({
+        // some basic styles to make the items look a bit nicer
+        userSelect: "none",
+        padding: grid * 2,
+        margin: `0 0 ${grid}px 0`,
+      
+        // change background colour if dragging
+        background: isDragging ? "lightgreen" : "grey",
+      
+        // styles we need to apply on draggables
+        ...draggableStyle
+      });
+      
+      const getListStyle = isDraggingOver => ({
+        background: isDraggingOver ? "lightblue" : "lightgrey",
+        padding: grid,
+        width: 250
+      });
 
     const changeSessionState = (event) => {
         const currentSessionState = { ...currentSession }
@@ -65,7 +87,7 @@ export const SessionForm = () => {
                 setShowExerciseForm(true)
             })
         } else {
-            
+
             session.time_completed=null
             session.sleep_hours = 0
             session.energy_level = 0
@@ -122,6 +144,20 @@ export const SessionForm = () => {
             })
         }
     }
+
+    const onDragEnd = (result) => {
+        const { destination, source, draggableId } = result;
+        
+        // dropped outside the list
+    if (!destination) {
+      return;
+    }
+
+    const newExerciseArray = [...sessionExercises];
+    newExerciseArray.splice(source.index, 1);
+    newExerciseArray.splice(destination.index, 0, sessionExercises[source.index])
+    setSessionExercises(newExerciseArray)
+  };
 
     //show session form and then switch to showing newly saved session after submit
     return <> {showSessionForm ?  <form className="SessionForm">
@@ -208,21 +244,49 @@ export const SessionForm = () => {
         </form></> : <></> }
 
         {/* //show the exercises that have been added to the session so far */}
-        {sessionExercises.map(exercise => {
-            if (exercise != undefined) {
-            return <div className="card" key={`exercise_${exercise.id}`}>
-                <div className='card_item' >{exercise.exercise.name}</div>
-                <div className='card_item' >{exercise.notes}</div>
-                <div className='card_item' >{exercise.sets}</div>
-                <div className='card_item' >{exercise.reps}</div>
-                <button className="btn btn-3"
-                    onClick={() => {
-                        setNewExercise(exercise)
-                        setShowExerciseForm(true)
-                        }}
-                >Edit</button>
-            </div>
-            }
-        })}
+        <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="exerciseList">
+            {(provided, snapshot) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+                {sessionExercises.map((exercise, index) => {
+                    if (exercise != undefined) {
+                    
+                   return <Draggable key={exercise.id} draggableId={String(exercise.id)} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
+                      )}
+                    >
+                    <div className="card" key={`exercise_${exercise.id}`} onClick={() => setDraggingExercise(exercise)}>
+                        <div className='card_item' >{exercise.exercise.name}</div>
+                        <div className='card_item' >{exercise.notes}</div>
+                        <div className='card_item' >{exercise.sets}</div>
+                        <div className='card_item' >{exercise.reps}</div>
+                        <button className="btn btn-3"
+                            onClick={() => {
+                                setNewExercise(exercise)
+                                setShowExerciseForm(true)
+                                }}
+                        >Edit</button>
+                    </div>
+                    </div>
+                  )}
+                </Draggable>
+                    }
+                })}
+                {provided.placeholder}
+                </div>
+          )}
+            </Droppable>
+        </DragDropContext>
         </>
 }
