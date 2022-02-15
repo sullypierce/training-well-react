@@ -60,9 +60,12 @@ export const SessionForm = () => {
         const session = {...currentSession}
         if (currentSession.id) {
             updateSession(session)
-            .then(() => setShowSessionForm(false))
+            .then(() => {
+                setShowSessionForm(false)
+                setShowExerciseForm(true)
+            })
         } else {
-
+            
             session.time_completed=null
             session.sleep_hours = 0
             session.energy_level = 0
