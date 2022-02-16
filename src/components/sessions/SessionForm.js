@@ -157,6 +157,7 @@ export const SessionForm = () => {
     newExerciseArray.splice(source.index, 1);
     newExerciseArray.splice(destination.index, 0, sessionExercises[source.index])
     setSessionExercises(newExerciseArray)
+    data.update('loggedexercises', `${draggableId}?move=${destination.index+1}`, sessionExercises[source.index])
   };
 
     //show session form and then switch to showing newly saved session after submit
