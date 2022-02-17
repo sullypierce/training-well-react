@@ -14,6 +14,7 @@ export const BenchmarkList = (props) => {
 
     return (
         <article className="games">
+        <h1 className="spacer"></h1>
         <button className="btn btn-2 btn-sep icon-create button"
         onClick={() => sendToForm("0")}
         >Set New Benchmark</button>

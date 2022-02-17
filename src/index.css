@@ -17,6 +17,10 @@ code {
   
 }
 
+.spacer {
+  height: 20px;
+}
+
 .card {
   display: flex;
   flex-direction: column;

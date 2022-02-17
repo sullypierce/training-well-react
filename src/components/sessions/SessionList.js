@@ -38,7 +38,7 @@ export const SessionList = (props) => {
 
     useEffect(() => {
         if(nextSessionRef.current){
-            nextSessionRef.current.scrollIntoView({behavior: "smooth"})
+            nextSessionRef.current.scrollIntoView({behavior: "smooth", block: 'center'})
         }
     }, [nextSessionRef])
 
@@ -54,12 +54,14 @@ export const SessionList = (props) => {
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
-                        <button className="btn btn-3 card_button"
-                                    onClick={() => {sendToSessionForm(session)}}
-                                    >Edit</button>
-                        <button className="btn btn-3 card_button"
-                            onClick={() => {sendToSessionExerciseList(session)}}
-                        >Details</button>
+                        <div>
+                            <button className="btn btn-3 card_button"
+                                onClick={() => {sendToSessionExerciseList(session)}}
+                            >Details</button>
+                            <button className="btn btn-3 card_button"
+                                        onClick={() => {sendToSessionForm(session)}}
+                            >Edit</button>
+                        </div>
                     </section>
                 })
             }

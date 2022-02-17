@@ -10,9 +10,7 @@ export const BenchmarkProvider = (props) => {
     const navigate = useNavigate()
 
     const sendToForm = (id) => {
-        console.log(id)
         setEditBenchmarkId(id)
-        console.log(editBenchmarkId)
         navigate("/benchmarks/form")
     }
 
