@@ -33,13 +33,6 @@ export const SessionList = (props) => {
 
     useEffect(() => {
         getSessions()
-        const today = new Date()
-        const month = today.getMonth()+1
-        const day= today.getDate()
-        const year = today.getFullYear()
-        console.log(today)
-        console.log(month, day, year)
-        
         
     }, [])
 
@@ -61,10 +54,10 @@ export const SessionList = (props) => {
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
-                        <button className="btn btn-3"
+                        <button className="btn btn-3 card_button"
                                     onClick={() => {sendToSessionForm(session)}}
                                     >Edit</button>
-                        <button className="btn btn-3"
+                        <button className="btn btn-3 card_button"
                             onClick={() => {sendToSessionExerciseList(session)}}
                         >Details</button>
                     </section>
