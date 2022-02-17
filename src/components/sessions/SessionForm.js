@@ -45,6 +45,7 @@ export const SessionForm = () => {
 
     const grid = 8;
 
+    //styling for each exercise in the list
     const getItemStyle = (isDragging, draggableStyle) => ({
         // some basic styles to make the items look a bit nicer
         userSelect: "none",
@@ -58,6 +59,7 @@ export const SessionForm = () => {
         ...draggableStyle
       });
       
+      //styling for the background of the exercise list 
       const getListStyle = isDraggingOver => ({
         background: isDraggingOver ? "lightblue" : "lightgrey",
         padding: grid,
