@@ -50,7 +50,7 @@ export const SessionList = (props) => {
         >Schedule New Session</button>
             {
                 sessions.map(session => {
-                    return <section id={`sesssion_${session.id}`} key={`session--${session.id}`} ref={session.next_scheduled ? nextSessionRef : null} className={session.time_completed != null ? 'card session complete': 'card session tbd'}>
+                    return <section id={`sesssion_${session.id}`} key={`session--${session.id}`} ref={session.next_scheduled ? nextSessionRef : null} className={`${session.time_completed != null ? 'card session complete': 'card session tbd'} ${session.next_scheduled ? 'next_session': 'not_next'}`}>
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>

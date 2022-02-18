@@ -9,11 +9,16 @@
     opacity: 1;
 }
 
+
 .tbd {
-    background-color: red;
+    background-color: lightgray;
     opacity: 1;
 }
 
 .titlecard {
     color: green
 }
+
+.next_session{
+    background-color: darkgreen;
+  }
