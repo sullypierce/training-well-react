@@ -25,7 +25,7 @@ export const Register = () => {
                 "is_coach": coachAccount.current.value,
                 "password": password.current.value
             }
-
+            console.log(newUser)
             return fetch("http://127.0.0.1:8000/register", {
                 method: "POST",
                 headers: {
@@ -38,6 +38,8 @@ export const Register = () => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("tw_token", res.token)
+                        //localStorage.setItem("training_plan_id", res.training_plan_id)
+                        localStorage.setItem('is_coach', res.is_coach)
                         navigate('/')
                     }
                 })

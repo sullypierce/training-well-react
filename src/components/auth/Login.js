@@ -27,7 +27,8 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem("tw_token", res.token)
-                    localStorage.setItem("training_plan_id", res.training_plan_id)
+                    //localStorage.setItem("training_plan_id", res.training_plan_id)
+                    localStorage.setItem('is_coach', res.is_coach)
                     navigate('/')
                 }
                 else {
