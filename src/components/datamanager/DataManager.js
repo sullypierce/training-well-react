@@ -1,21 +1,23 @@
 
 
-const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Token ${localStorage.getItem("tw_token")}`
-}
 
 export const data =  {
     get: (endpoint) => {
         return fetch(`http://localhost:8000/${endpoint}`, {
-            headers:headers
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("tw_token")}`
+            } 
         })
             .then(response => response.json())
     },
 
     getOne: (endpoint, id) => {
         return fetch(`http://localhost:8000/${endpoint}/${id}`, {
-            headers:headers
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("tw_token")}`
+            } 
         })
             .then(response => response.json())
     },
@@ -35,7 +37,10 @@ export const data =  {
     update: (endpoint, id, object) => {
         return fetch(`http://localhost:8000/${endpoint}/${id}`, {
             method: "PUT",
-            headers: headers,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("tw_token")}`
+            },
             body: JSON.stringify(object)
          })
     },
@@ -43,7 +48,10 @@ export const data =  {
     delete: (endpoint, id) => {
         return fetch(`http://localhost:8000/${endpoint}/${id}`, {
             method: 'DELETE',
-            headers:headers
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("tw_token")}`
+            } 
         })
             .then(response => response.json())
     }

@@ -1,9 +1,11 @@
-import React, { useRef } from "react"
+import React, { useRef, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 import "./Auth.css"
 
 
 export const Login = () => {
+    const { getSessions} = useContext(TrainingPlanContext)
     const username = useRef()
     const password = useRef()
     const invalidDialog = useRef()
@@ -29,7 +31,9 @@ export const Login = () => {
                     localStorage.setItem("tw_token", res.token)
                     //localStorage.setItem("training_plan_id", res.training_plan_id)
                     localStorage.setItem('is_coach', res.is_coach)
-                    navigate('/')
+                    getSessions().then(() => {
+                        navigate('/')
+                    })
                 }
                 else {
                     invalidDialog.current.showModal()

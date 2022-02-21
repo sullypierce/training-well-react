@@ -16,12 +16,14 @@ export const TrainingPlanProvider = (props) => {
 
     const [ loggedExercises, setLoggedExercises ] = useState([])
     const [editLoggedExerciseId, setEditLoggedExerciseId] = useState(0)
+    const [coachConnections, setCoachConnections] = useState([])
     const navigate = useNavigate()
 
     
     useEffect(() => {
         getTrainingPlan()
         getSessions()
+        getCoachConnections()
     }, [])
     
 
@@ -75,6 +77,11 @@ export const TrainingPlanProvider = (props) => {
     const getExercisesBySession = (id) => {
         return data.get(`loggedexercises?session_id=${id}`)
             .then(setSingleSessionExercises)
+    }
+
+    const getCoachConnections = () => {
+        data.get('coachconnections')
+        .then(setCoachConnections)
     }
     
     
