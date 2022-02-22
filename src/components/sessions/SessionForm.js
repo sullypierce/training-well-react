@@ -16,7 +16,7 @@ export const SessionForm = () => {
 
     //sessionExercises is the exercises for this, this variable is what reflects what is rendered
     const [sessionExercises, setSessionExercises]= useState([])
-    
+
     const [draggingExercise, setDraggingExercise] = useState({})
     const [newExercise, setNewExercise] = useState({
         notes: '',
@@ -186,21 +186,21 @@ export const SessionForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="assigned_date">Schedule Date: </label>
-                    <input type="date" name="assigned_date" required autoFocus className="form-control"
+                    <input type="date" name="assigned_date" className='date_el' required autoFocus className="form-control"
                         value={currentSession.assigned_date}
                         onChange={changeSessionState}
                     />
                 </div>
             </fieldset>
 
-             <button className="btn btn-3"
+             <button className="btn btn-3 button"
                     onClick={submitSession}
             >Save</button>
         </form> : 
         <><h3>Session</h3>
         <div className="session__date">Date: {currentSession.assigned_date}</div>
                         <div className="session__notes">notes: {currentSession.notes}</div>
-                        <button className="btn btn-3"
+                        <button className="btn btn-3 button"
                                     onClick={() => {setShowSessionForm(true)}}
                                     >Edit</button></>}
 
@@ -281,7 +281,7 @@ export const SessionForm = () => {
                         <div className='card_item' >{exercise.notes}</div>
                         <div className='card_item' >{exercise.sets}</div>
                         <div className='card_item' >{exercise.reps}</div>
-                        <button className="btn btn-3"
+                        <button className="btn btn-3 button"
                             onClick={() => {
                                 setNewExercise(exercise)
                                 setShowExerciseForm(true)
