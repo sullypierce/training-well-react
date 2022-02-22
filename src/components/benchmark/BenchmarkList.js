@@ -27,7 +27,7 @@ export const BenchmarkList = (props) => {
                         <div className="benchmark__weight">Weight {benchmark.weight}</div>
                         <div className="benchmark__notes">Notes: {benchmark.notes} </div>
                         <div className="benchmark__date">Date Set: {benchmark.date} </div>
-                        <button className="btn btn-3"
+                        <button className="btn btn-3 card_button"
                                     onClick={() => {sendToForm(benchmark.id)}}
                                     >Edit</button>
                     </section>
