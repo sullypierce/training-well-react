@@ -13,7 +13,10 @@ export const SessionForm = () => {
     const {exercises, getExercises} = useContext(ExerciseContext)
     const [showSessionForm, setShowSessionForm] = useState(true)
     const [showExerciseForm, setShowExerciseForm] = useState(false)
+
+    //sessionExercises is the exercises for this, this variable is what reflects what is rendered
     const [sessionExercises, setSessionExercises]= useState([])
+    
     const [draggingExercise, setDraggingExercise] = useState({})
     const [newExercise, setNewExercise] = useState({
         notes: '',
@@ -112,20 +115,24 @@ export const SessionForm = () => {
         if (newExercise.id) {
             data.update('loggedexercises', exercise.id, exercise)
             .then(() => {
-                const newExerciseArray = sessionExercises.map((ex) => {
-                    if (ex.id != newExercise.id) {
-                        return ex
-                    }
+                data.get(`loggedexercises?session_id=${currentSession.id}`)
+                .then((data) => {
+                    setSessionExercises(data)
                 })
-                newExerciseArray.push(exercise)
-                setSessionExercises(newExerciseArray)
-                setNewExercise({
-                    notes: '',
-                    exercise_id: 1,
-                    reps: 0,
-                    sets: 0
-                })
-                setShowExerciseForm(false)
+                // const newExerciseArray = sessionExercises.map((ex) => {
+                //     if (ex.id != newExercise.id) {
+                //         return ex
+                //     }
+                // })
+                // newExerciseArray.push(exercise)
+                // setSessionExercises(newExerciseArray)
+                // setNewExercise({
+                //     notes: '',
+                //     exercise_id: 1,
+                //     reps: 0,
+                //     sets: 0
+                // })
+                // setShowExerciseForm(false)
             })
         }else {
 
