@@ -93,3 +93,10 @@ flex-direction: row;
 ::-webkit-datetime-edit-year-field { text-transform: uppercase; }
 ::-webkit-inner-spin-button { height: 10px; }
 /* ::-webkit-calendar-picker-indicator { background: transparent;} */
+
+.welcome {
+  width: 90%;
+  text-align: right;
+  position: fixed;
+  padding-top: 15px;
+}

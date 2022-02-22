@@ -1,9 +1,11 @@
-import React from "react"
+import {React, useContext} from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 import "./NavBar.css"
 import logo from './trainingwell_logo.svg'
 
 export const NavBar = () => {
+    const {coachConnections} = useContext(TrainingPlanContext)
     const navigate = useNavigate()
     return (
         <ul className="navbar">
@@ -20,6 +22,12 @@ export const NavBar = () => {
             <li className="navbar__item">
             <Link className="nav-link" to="/benchmarks">Benchmarks</Link>
             </li>
+            {coachConnections.length == 0 ? 
+            <li className="navbar__item">
+                <Link className="nav-link" to="/coachs">Find a Coach</Link>
+            </li>
+            : <></>
+            }
             <li className="navbar__item">
             <Link className="nav-link" to="/profile">Profile</Link>
             </li>
