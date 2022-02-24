@@ -3,6 +3,7 @@ import './session.css'
 import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 import { data } from "../datamanager/DataManager"
+import { Button } from "../htmlComponents/Button"
 
 export const SessionList = (props) => {
     const { sessions, getSessions, setSingleViewSession, getExercisesBySession, setEditSession, setSingleSessionExercises }  = useContext(TrainingPlanContext)
@@ -44,7 +45,8 @@ export const SessionList = (props) => {
     }, [nextSessionRef])
 
     const deleteSession = (session) => {
-        data.delete(`sessions/${session.id}`)
+        data.delete('sessions', session.id)
+        .then(getSessions)
     }
 
     return (
@@ -66,9 +68,8 @@ export const SessionList = (props) => {
                             <button className="btn btn-3 card_button"
                                         onClick={() => {sendToSessionForm(session)}}
                             >Edit</button>
-                            <button className="btn btn-3 card_button delete_button"
-                                        onClick={() => {deleteSession(session)}}
-                            >X</button>
+                            <Button clickFunction = {() => deleteSession(session)} buttonText = {'X'} />
+
                         </div>
                     </section>
                 })

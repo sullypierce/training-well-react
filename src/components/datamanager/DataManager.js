@@ -53,7 +53,6 @@ export const data =  {
                 Authorization: `Token ${localStorage.getItem("tw_token")}`
             } 
         })
-            .then(response => response.json())
     }
 
 }
