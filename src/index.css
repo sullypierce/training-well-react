@@ -55,6 +55,12 @@ flex-direction: row;
   width: 150px;
 }
 
+.button_div{
+  display: flex;
+  justify-content: row;
+  align-content: left;
+}
+
 .card_button {
   background-color: darkolivegreen;
   border: black;
@@ -99,4 +105,11 @@ flex-direction: row;
   text-align: right;
   position: fixed;
   padding-top: 15px;
+}
+
+.delete_button {
+  justify-self: left;
+  width: 5%;
+  justify-content: center;
+  vertical-align: center;
 }
