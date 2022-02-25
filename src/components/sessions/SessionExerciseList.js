@@ -72,9 +72,7 @@ export const SessionExerciseList = (props) => {
     return (
         <article className="sessions">
         <h2>Session Details</h2>
-        <button className="btn btn-2 btn-sep icon-create button"
-        onClick={logSession}
-        >Log Session</button>
+        
         <div className="card">
         <h3>{singleViewSession.assigned_date}</h3>
             <h3>{singleViewSession.notes}</h3>
@@ -124,6 +122,9 @@ export const SessionExerciseList = (props) => {
                     </section>
                 })
             }
+            <button className="btn btn-2 btn-sep icon-create button"
+            onClick={logSession}
+            >Log Session</button>
         </article>
     )
 }

@@ -62,12 +62,10 @@ export const SessionList = (props) => {
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
                         <div className="buttton_div">
-                            <button className="btn btn-3 card_button"
-                                onClick={() => {sendToSessionExerciseList(session)}}
-                            >Details</button>
-                            <button className="btn btn-3 card_button"
-                                        onClick={() => {sendToSessionForm(session)}}
-                            >Edit</button>
+                            <Button clickFunction={() => sendToSessionExerciseList(session)} buttonText={"Details/Log"} />
+                            
+                            <Button clickFunction={() => sendToSessionForm(session)} buttonText = {'Edit'}/>
+                           
                             <Button clickFunction = {() => deleteSession(session)} buttonText = {'X'} />
 
                         </div>
