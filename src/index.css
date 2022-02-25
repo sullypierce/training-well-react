@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +9,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightgreen;
+  background-size: 20px 20px;
+  background-image:
+    linear-gradient(to right, lightgrey .1px, transparent 1px),
+    linear-gradient(to bottom, lightgrey 1px, transparent 1px);
+  background-opacity: .1;
 }
 
 code {
@@ -98,7 +106,7 @@ flex-direction: row;
 ::-webkit-datetime-edit-day-field { text-transform: uppercase; }
 ::-webkit-datetime-edit-year-field { text-transform: uppercase; }
 ::-webkit-inner-spin-button { height: 10px; }
-/* ::-webkit-calendar-picker-indicator { background: transparent;} */
+/* ::-webkit-calendar-picker-indicator { background: transparent;}  */
 
 .welcome {
   width: 90%;

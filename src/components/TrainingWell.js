@@ -16,6 +16,7 @@ export const TrainingWell = () => {
       };
     
     return <>
+    
     <TrainingPlanProvider>
     <BenchmarkProvider>
     <ExerciseProvider>
