@@ -61,12 +61,12 @@ export const SessionList = (props) => {
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
-                        <div className="flex flex-row">
+                        <div className="flex flex-row justify-end">
                             <Button clickFunction={() => sendToSessionExerciseList(session)} buttonText={"Details/Log"} />
                             
                             <Button clickFunction={() => sendToSessionForm(session)} buttonText = {'Edit'}/>
                            
-                            <Button clickFunction = {() => deleteSession(session)} buttonText = {'X'} />
+                            <Button clickFunction = {() => deleteSession(session)} buttonText={'X'} classes='basis-1/12' />
 
                         </div>
                     </section>
