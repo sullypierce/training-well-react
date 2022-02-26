@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom"
 import { TrainingPlanContext } from "../trainingplan/TrainingPlanDataProvider"
 import { data } from "../datamanager/DataManager"
 import { Button } from "../htmlComponents/Button"
+import { DeleteModal } from "../htmlComponents/DeleteModal"
 
 export const SessionList = (props) => {
     const { sessions, getSessions, setSingleViewSession, getExercisesBySession, setEditSession, setSingleSessionExercises }  = useContext(TrainingPlanContext)
     const navigate = useNavigate()
     const [nextSession, setNextSession] = useState({})
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [sessionToDelete, setSessionToDelete] = useState({})
     const nextSessionRef = useRef()
     
     const sendToSessionExerciseList = (session) => {
@@ -52,12 +55,11 @@ export const SessionList = (props) => {
     return (
         <article className="sessions">
         <h2 className='titlecard'>Sessions</h2>
-        <button className="btn btn-2 btn-sep icon-create button"
-        onClick={() => sendToSessionForm({})}
-        >Schedule New Session</button>
+        <Button clickFunction={() => sendToSessionForm({})} buttonText={'Schedule New Session'} classes={'p-2'} />
+
             {
                 sessions.map(session => {
-                    return <section id={`session_${session.id}`} key={`session--${session.id}`} ref={session.next_scheduled ? nextSessionRef : null} className={`${session.time_completed != null ? 'card session complete': 'card session tbd'} ${session.next_scheduled ? 'next_session': 'not_next'}`}>
+                    return <section id={`session_${session.id}`} key={`session--${session.id}`} ref={session.next_scheduled ? nextSessionRef : null} className={`${session.time_completed != null ? 'card session complete': 'card session tbd'} ${session.next_scheduled ? 'next_session': 'not_next'} bg-gradient-to-tr from-green-400 to-slate-200 border-2`}>
 
                         <div className="session__date">Date: {session.assigned_date}</div>
                         <div className="session__notes">notes: {session.notes}</div>
@@ -66,12 +68,17 @@ export const SessionList = (props) => {
                             
                             <Button clickFunction={() => sendToSessionForm(session)} buttonText = {'Edit'}/>
                            
-                            <Button clickFunction = {() => deleteSession(session)} buttonText={'X'} classes='basis-1/12' />
-
+                            <Button clickFunction = {() => {
+                                setSessionToDelete(session)
+                                setShowDeleteModal(true)
+                                }} 
+                                buttonText={'X'} classes='basis-1/12' />
+                        
                         </div>
                     </section>
                 })
             }
+            <DeleteModal show={showDeleteModal} item={sessionToDelete} delete={deleteSession} />
         </article>
     )
 }
