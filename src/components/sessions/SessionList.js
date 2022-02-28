@@ -48,15 +48,17 @@ export const SessionList = (props) => {
     }, [nextSessionRef])
 
     const deleteSession = (session) => {
+        setShowDeleteModal(false)
         data.delete('sessions', session.id)
         .then(getSessions)
     }
 
     return (
         <article className="sessions">
-        <h1 className='border-b-2 m-2 p-2 text-amber-800'>Sessions</h1>
-        <Button clickFunction={() => sendToSessionForm({})} buttonText={'Schedule New Session'} classes={'p-2'} />
+            <h1 className='border-b-2 m-2 p-2 text-amber-800'>Sessions</h1>
+            <Button clickFunction={() => sendToSessionForm({})} buttonText={'Schedule New Session'} classes={'p-2'} />
 
+            <DeleteModal show={showDeleteModal} item={sessionToDelete} delete={deleteSession} closeModal={() => setShowDeleteModal(false)} />
             {
                 sessions.map(session => {
                     return <section id={`session_${session.id}`} key={`session--${session.id}`} ref={session.next_scheduled ? nextSessionRef : null} className={`${session.time_completed != null ? 'card session complete': 'card session tbd'} ${session.next_scheduled ? 'next_session': 'not_next'} bg-gradient-to-tr from-green-400 to-slate-200 border-2`}>
@@ -78,7 +80,6 @@ export const SessionList = (props) => {
                     </section>
                 })
             }
-            <DeleteModal show={showDeleteModal} item={sessionToDelete} delete={deleteSession} />
         </article>
     )
 }
