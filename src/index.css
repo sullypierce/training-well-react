@@ -9,12 +9,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightgrey;
-  background-size: 30px 30px;
-  background-image:
-    linear-gradient(to right, darkgreen 1px, transparent 1px),
-    linear-gradient(to bottom, darkgreen 1px, transparent 1px);
-  background-opacity: .3;
+  background-image: linear-gradient(to right, gold , brown);
+
+  
 }
 
 code {
