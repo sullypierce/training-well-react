@@ -8,10 +8,10 @@ export const NavBar = () => {
     const {coachConnections} = useContext(TrainingPlanContext)
     const navigate = useNavigate()
     return (
-        <ul className="navbar bg-transparent">
+        <ul className="navbar bg-transparent flex-wrap basis-1/5">
             <img className="logo" src={logo}/>
             <li className="navbar__header">
-            <h2>TrainingWell</h2>
+            <h1>TrainingWell</h1>
             </li>
             <li className="navbar__item">
             <Link className="nav-link" to="/sessions">Training</Link>

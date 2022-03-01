@@ -55,7 +55,7 @@ export const SessionList = (props) => {
 
     return (
         <article className="sessions">
-            <h1 className='border-b-2 m-2 p-2 text-amber-800'>Sessions</h1>
+            <h1 className='border-b-2 border-slate-900 m-2 p-2 text-amber-800'>Sessions</h1>
             <Button clickFunction={() => sendToSessionForm({})} buttonText={'Schedule New Session'} classes={'p-2'} />
 
             <DeleteModal show={showDeleteModal} item={sessionToDelete} delete={deleteSession} closeModal={() => setShowDeleteModal(false)} />
