@@ -8,6 +8,7 @@ import { ExerciseForm } from "./exercise/ExerciseForm"
 import { SessionList } from "./sessions/SessionList"
 import { SessionExerciseList } from "./sessions/SessionExerciseList"
 import { SessionForm } from "./sessions/SessionForm"
+import { Charts } from "./visualdata/Charts"
 
 export const ApplicationViews = () => {
     return <>
@@ -31,6 +32,7 @@ export const ApplicationViews = () => {
                         <Route exact path='sessions' element={<SessionList/>}/>
                         <Route exact path='session/details' element={<SessionExerciseList />}/>
                         <Route exact path='sessions/form' element={<SessionForm/>}/>
+                        <Route exact path='charts' element={<Charts />} />
                     </Routes>
                 
         </main>

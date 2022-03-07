@@ -7,6 +7,8 @@ import logo from './trainingwell_logo.svg'
 export const NavBar = () => {
     const {coachConnections} = useContext(TrainingPlanContext)
     const navigate = useNavigate()
+
+    const linkClasses = 'nav-link basis-1/6'
     return (
         <ul className="navbar bg-transparent flex-wrap basis-1/5">
             <img className="logo" src={logo}/>
@@ -14,27 +16,30 @@ export const NavBar = () => {
             <h1>TrainingWell</h1>
             </li>
             <li className="navbar__item">
-            <Link className="nav-link" to="/sessions">Training</Link>
+            <Link className={linkClasses} to="/sessions">Training</Link>
             </li>
             <li className="navbar__item">
-            <Link className="nav-link" to="/exercises">Exercises</Link>
+            <Link className={linkClasses} to="/exercises">Exercises</Link>
             </li>
             <li className="navbar__item">
-            <Link className="nav-link" to="/benchmarks">Benchmarks</Link>
+            <Link className={linkClasses} to="/benchmarks">Benchmarks</Link>
             </li>
             {coachConnections.length == 0 ? 
             <li className="navbar__item">
-                <Link className="nav-link" to="/coachs">Find a Coach</Link>
+                <Link className={linkClasses} to="/coachs">Find a Coach</Link>
             </li>
             : <></>
             }
             <li className="navbar__item">
-            <Link className="nav-link" to="/profile">Profile</Link>
+            <Link className={linkClasses} to="/profile">Profile</Link>
+            </li>
+            <li className="navbar__item">
+            <Link className={linkClasses} to="/charts">Data</Link>
             </li>
             {
                 (localStorage.getItem("tw_token") !== null) ?
                 <li className="navbar__item">
-                            <Link className="nav-link" to='/login' onClick={() => {
+                            <Link className={linkClasses} to='/login' onClick={() => {
                                 localStorage.clear()
                             }}>Logout</Link>
                         </li>
@@ -42,10 +47,10 @@ export const NavBar = () => {
                          :
                     <>
                         <li className="navbar__item">
-                            <Link className="nav-link" to="/login">Login</Link>
+                            <Link className={linkClasses} to="/login">Login</Link>
                         </li>
                         <li className="navbar__item">
-                            <Link className="nav-link" to="/register">Register</Link>
+                            <Link className={linkClasses} to="/register">Register</Link>
                         </li>
                     </>
             }        </ul>
