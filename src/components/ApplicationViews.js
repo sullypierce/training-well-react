@@ -17,7 +17,7 @@ export const ApplicationViews = () => {
             lineHeight: "1.75rem"
         }}>
             <NavBar/>
-            <h2 className="welcome">Welcome NAME!</h2>
+            <h2 className="welcome">Welcome {localStorage.getItem("account_name")}!</h2>
                     <Routes>
                         <Route path="/welcome" element={<>
                             <h2>Welcome!</h2></>}/>

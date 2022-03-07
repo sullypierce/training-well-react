@@ -31,6 +31,7 @@ export const Login = () => {
                     localStorage.setItem("tw_token", res.token)
                     //localStorage.setItem("training_plan_id", res.training_plan_id)
                     localStorage.setItem('is_coach', res.is_coach)
+                    localStorage.setItem('account_name', res.account_name)
                     getSessions().then(() => {
                         navigate('/')
                     })
