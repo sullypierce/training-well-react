@@ -20,11 +20,15 @@ export const Charts = () => {
 
     const [averageSleep, setAverageSleep] = useState(0)
 
+    const [sleepVsQuality, setSleepVsQuality] = useState([])
+
     const getChartData = () => {
         data.get('chartdata?datatype=benchmarks')
         .then(data => setBenchmarkData(data))
         data.get('chartdata?datatype=sleep')
         .then(data => setAverageSleep(data))
+        data.get('chartdata?datatype=sleepvsquality')
+        .then(data => setSleepVsQuality(data))
     }
 
     useEffect(() => {
@@ -98,16 +102,13 @@ export const Charts = () => {
           }}
         >
           <CartesianGrid />
-          <XAxis type="number" dataKey="x" name="stature" unit="cm" />
-          <YAxis type="number" dataKey="y" name="weight" unit="kg" />
+          <XAxis type="number" dataKey="x" name="stature" unit=" hours" />
+          <YAxis type="number" dataKey="y" name="weight" unit=" quality" />
           <ZAxis type="number" range={[100]} />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Legend />
-          {/* {Object.keys(benchmarkData).map(benchmark => 
-              <Scatter name={benchmark} data={benchmarkData[benchmark]} fill="#8884d8" line shape="cross" />
-          )} */}
-          <Scatter name="A school" data={data01} fill="#8884d8" line shape="cross" />
-          <Scatter name="B school" data={data02} fill="#82ca9d" line shape="diamond" />
+          
+          <Scatter name="" data={sleepVsQuality} fill="#8884d8" line shape="cross" />
         </ScatterChart>
         </div>
 
@@ -129,9 +130,7 @@ export const Charts = () => {
           <ZAxis type="number" range={[100]} />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Legend />
-          {/* {Object.keys(benchmarkData).map(benchmark => 
-              <Scatter name={benchmark} data={benchmarkData[benchmark]} fill="#8884d8" line shape="cross" />
-          )} */}
+          
           <Scatter name="A school" data={data01} fill="#8884d8" line shape="cross" />
           <Scatter name="B school" data={data02} fill="#82ca9d" line shape="diamond" />
         </ScatterChart>
