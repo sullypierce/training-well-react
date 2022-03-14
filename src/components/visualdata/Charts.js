@@ -54,12 +54,16 @@ export const Charts = () => {
     
     //   const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}]
 
+    const round = (value, decimals) => {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
+
     return (
         <article className="charts">
         <h1 className="charts">See Your Data</h1>
         <div>
             <h2>Sleep</h2>
-            <div>In the last month, you have averaged {averageSleep} hours of sleep before a workout.</div>
+            <div>In the last month, you have averaged {round(averageSleep, 2)} hours of sleep before a workout.</div>
         </div>
         
         
@@ -103,12 +107,12 @@ export const Charts = () => {
         >
           <CartesianGrid />
           <XAxis type="number" dataKey="x" name="stature" unit=" hours" />
-          <YAxis type="number" dataKey="y" name="weight" unit=" quality" />
+          <YAxis type="number" dataKey="y" name="weight" unit="" />
           <ZAxis type="number" range={[100]} />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Legend />
           
-          <Scatter name="" data={sleepVsQuality} fill="#8884d8" line shape="cross" />
+          <Scatter name="X: Hours of Sleep,     Y: Session Quality" data={sleepVsQuality} fill="#8884d8" line shape="cross" />
         </ScatterChart>
         </div>
 
